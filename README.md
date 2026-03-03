@@ -12,7 +12,9 @@
 
 ---
 
-## Part 1:
+## Part 1: What is an API
+
+---
 
 ### Video 1:
 
@@ -74,3 +76,11 @@ _Steps :-_ _Stop_ Using *Monolithich Archi*tecture / *Decouple App*lication
 - _Previous ML Monolithic Architecture :-_ ML Model <--> Backend <--> Frontend
 - _Present ML API Architecture :-_ ML Model <--> Backend <--> API
 - For the multiple platform it is same as the DB based we discussed earlier above in the problem case
+
+---
+
+### Video 2: FastAPI Philosophy
+
+#### FastAPI?
+
+FastAPI is a modern, high-performance web framework for building APIs with Python
