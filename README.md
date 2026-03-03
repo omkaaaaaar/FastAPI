@@ -88,3 +88,8 @@ FastAPI is built upon 2 famous python libraries:Starlette and Pydanctiv
 
 - Starlette: Starletter anages how your API receives requests and sends back responses, used to process HTTP requests.
 - Pydantic: Pydantic is used to check if the data comingg into your API is correct and in the right format, it is used for Data Validation.
+
+#### Philosophy of FastAPI
+
+- APIs made in FastAPI will be Fast to Run
+- API building will be Fast, Fast to code
