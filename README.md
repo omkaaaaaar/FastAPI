@@ -84,3 +84,7 @@ _Steps :-_ _Stop_ Using *Monolithich Archi*tecture / *Decouple App*lication
 #### FastAPI?
 
 FastAPI is a modern, high-performance web framework for building APIs with Python
+FastAPI is built upon 2 famous python libraries:Starlette and Pydanctiv
+
+- Starlette: Starletter anages how your API receives requests and sends back responses, used to process HTTP requests.
+- Pydantic: Pydantic is used to check if the data comingg into your API is correct and in the right format, it is used for Data Validation.
