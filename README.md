@@ -93,3 +93,8 @@ FastAPI is built upon 2 famous python libraries:Starlette and Pydanctiv
 
 - APIs made in FastAPI will be Fast to Run
 - API building will be Fast, Fast to code
+
+#### Why FastAPI is fast to run?
+
+ML model api --> /predict (endpoint) --> f1 & f2 (input1/2) = prediction
+image ![alt text](./images/FastAPI_Struct.png)
