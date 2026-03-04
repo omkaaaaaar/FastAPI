@@ -114,3 +114,30 @@ SGI - converts data into python understandable format (translator), it establish
 1. Automatic Input Variable (by default supports pydantic, which mean whenever an endpoint is created we can specify the input which we are receiveing is of which data type, the integration of FastAPI and pydantic is tightly coupled)
 2. _Auto-Generated_ Interactive _Documentation_ (not only we can understand aboutthe API here but also can interact with them)
 3. Seamless Integration with Modern Ecosystem (ML/DL Libraires, OAuth, JWT, SQL Alchemy, Docker, Kubernetes, etc.)
+
+##### Code:
+
+```
+from fastapi import FastAPI
+
+app = FastAPI() #object of FastAPI class is created and stored in the variable app
+
+@app.get("/") # Define a GET endpoint at the root URL ("/"), the get signifies that this endpoint will respond to GET requests
+#to fetch data from the server get request is used and to send data to the server post request is used
+def hello():
+    return {'message':'Hello World'} #return a JSON response with a message key and a value of "Hello, World!"
+
+```
+
+##### On terminal:
+
+```
+(myenv) (base) omkarpatkar@Omkar FastAPI % cd fastapi-tutorials
+(myenv) (base) omkarpatkar@Omkar fastapi-tutorials % uvicorn main:app --reload
+```
+
+##### Auto-Generated Documentation:
+
+If you hit /docs on the url
+Ex. :- http://127.0.0.1:8000/docs
+it'll show you the documentation and also the information about it and it also allows to interact over there (no need of s/w like postman)

@@ -7,3 +7,7 @@ app = FastAPI() #object of FastAPI class is created and stored in the variable a
 def hello():
     return {'message':'Hello World'} #return a JSON response with a message key and a value of "Hello, World!"
 
+
+@app.get("/about") # Define another GET endpoint at the URL "/about"
+def about():
+    return {'message': 'Hello, I am Omkar'} #return a JSON response with a message key and a value of "Hello, I am Omkar"
