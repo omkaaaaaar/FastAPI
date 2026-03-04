@@ -12,7 +12,7 @@
 
 ---
 
-## Part 1: What is an API
+## Part 1: Fundamentals
 
 ---
 
@@ -79,7 +79,7 @@ _Steps :-_ _Stop_ Using *Monolithich Archi*tecture / *Decouple App*lication
 
 ---
 
-### Video 2: FastAPI Philosophy
+### Video 2: FastAPI Philosophy, Setup, Installation and Code Demo
 
 #### FastAPI?
 
@@ -94,7 +94,23 @@ FastAPI is built upon 2 famous python libraries:Starlette and Pydanctiv
 - APIs made in FastAPI will be Fast to Run
 - API building will be Fast, Fast to code
 
-#### Why FastAPI is fast to run?
+##### Why FastAPI is fast to run?
 
 ML model api --> /predict (endpoint) --> f1 & f2 (input1/2) = prediction
+
 image ![alt text](./images/FastAPI_Struct.png)
+
+Client <--> Web Server (aws) <--> SGI (Server Gateway Interface) <--> API Code
+SGI - converts data into python understandable format (translator), it establishes 2 way communction between API code and Web Server
+
+##### Types of SGI
+
+- WSGI: Web-SGI is used in Flask for the 2 way communication, its limitations are that it is of synchronous nature (only 1 req per time), it also has blocking nature(it stops the other tasks because all the resources are blocked because theyre been used for the 1st task). Webserver used for WSGI (in Flask) is Gunicorn which is a WSGI HTTP server (this server is not recommended for scalable APIs because high latency and performance issues)
+
+- ASGI: Asynchronous-SGI is used in Fast API, it can do concurrent processes the library used to implement ASGI in Fast is Starlette and WebServer used in ASGI is Uvicorn which is generally preffered for its performance and asynchronous capabilities. FastAPI supports async and await features of python, it helps in parallel processing
+
+##### Why FastAPI is fast to code?
+
+1. Automatic Input Variable (by default supports pydantic, which mean whenever an endpoint is created we can specify the input which we are receiveing is of which data type, the integration of FastAPI and pydantic is tightly coupled)
+2. _Auto-Generated_ Interactive _Documentation_ (not only we can understand aboutthe API here but also can interact with them)
+3. Seamless Integration with Modern Ecosystem (ML/DL Libraires, OAuth, JWT, SQL Alchemy, Docker, Kubernetes, etc.)
