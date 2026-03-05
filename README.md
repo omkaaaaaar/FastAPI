@@ -141,3 +141,7 @@ def hello():
 If you hit /docs on the url
 Ex. :- http://127.0.0.1:8000/docs
 it'll show you the documentation and also the information about it and it also allows to interact over there (no need of s/w like postman)
+
+---
+
+### Video 3:
