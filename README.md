@@ -145,3 +145,13 @@ it'll show you the documentation and also the information about it and it also a
 ---
 
 ### Video 3:
+
+#### Problem Statement
+
+Endpoints
+
+- /create (create patients) -> json
+- /view (view patients)
+- /view|patient_id (too view a particular patient)
+- /update|patient_id (update data of a particular patient)
+- /delete|pateint_id
