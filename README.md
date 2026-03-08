@@ -155,3 +155,26 @@ Endpoints
 - /view|patient_id (too view a particular patient)
 - /update|patient_id (update data of a particular patient)
 - /delete|pateint_id
+
+#### Types of Software
+
+- Static (ex. Clock app, Calendar, Blog Website, etc) -> it does not work on any data, it only shows the data it has to the user
+
+- Dynamic (Excel, Instagram Website etc) -> it lets us modify, delete, update and crreate data
+  We can only perform **4 Operations** on the Dynamic S/W (CRUD Operations)
+  - Create
+  - Retrieve/Read
+  - Update
+  - Delete
+
+##### A Website is a software installed/running on a Server, and it is accessed by user (Client) through the Client's (User's) PC
+
+[Client pc] <-----> [Website](runnning on server)
+These both interact via INTERNET/ HTTP
+
+Ex. We want to retreive our profile from the Website(which is installed/running on the server) then we send a verb with the HTTP request, which is;
+
+- Profile Retrieve: HTTP -> Verb -> GET (Retreive Interaction) \*Used frequently
+- Posting Pic/Data: HTTP -> Verb -> POST (Create Interaction) \*Used frequently
+- Updating Exisiting resource: HTTP -> Verb -> PUT (Update Interaction)
+- Delete Existinf resource: HTTP -> Verb -> DELETE (Delete Interaction)
