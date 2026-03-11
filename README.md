@@ -144,7 +144,7 @@ it'll show you the documentation and also the information about it and it also a
 
 ---
 
-### Video 3:
+### Video 3: HTTP Methods || GET Method
 
 #### Problem Statement
 
@@ -178,3 +178,95 @@ Ex. We want to retreive our profile from the Website(which is installed/running 
 - Posting Pic/Data: HTTP -> Verb -> POST (Create Interaction) \*Used frequently
 - Updating Exisiting resource: HTTP -> Verb -> PUT (Update Interaction)
 - Delete Existinf resource: HTTP -> Verb -> DELETE (Delete Interaction)
+
+---
+
+### Video 4: Path & Query Parameters
+
+#### Path Params
+
+Path parameters are dynamic segments of a URL path used to identify a specific resource
+
+- In like previous vid, we saw that if we want to access the data of all patients we hit the /view endpoint | localhost:8000/view
+- But what if we want to access a specific patient?
+- localhost:8000/view/3 | The 3 here is a dynamic part which can be changed, with anyother patient number, the 3 part/endpoint is a dynamic potion which locates a **specific resource**.
+- This is what a Path Parameter do, the **3** here is the **Path Parameter**
+- Helps to Retrieve, Update and Delete specific user/patients data
+
+##### New Code
+
+in this endpoint the client/user can access any patient data that he want and we will achieve this by Path Parameters
+
+##### Path()
+
+The _Path function in FastAPI is used to provide_ metadata, validation rules, and documentation _hints for path parameters in your API endpoints._
+
+- Title
+- Description
+- Example
+- ge, gt, le, lt (greater equal to, greater than, less than equal to, less than)
+- Min_length
+- Max_length
+- regex
+
+#### HTTP Status code
+
+They are **3-digit numbers** returned by a webserver (like FastAPI) to indicate the **result** of a client's request (like from a browser or API consumer)
+Ex:-
+
+- 2xx | Success | The req was successfully recieved and processed
+- 3xx | Redirection | Further action needs to be taken (e.g. redirect)
+- 4xx | Client Error | Something is wrong with the request from the client
+- 5xx | Server Error | Something went wrong on the server side
+
+200 OK | Standard Success | A _get_ or _post_ succeeded
+201 Created | Resource Created | Alter a _post_ that creates something
+204 No Content | Success but no data returned | After a _Delete_ request
+
+400 Bad Request | Malformed or invalid request | Missing field wrong data type
+401 Unauthorized | No/invalid authentication | Login required
+403 Forbidden | Authenticated, but no permission | Logged inbut not allowed
+404 Not Found | Resource doesn't exist | Patient ID not in DB
+
+500 Internal Server Error | Generic Failure | Something broke on the server
+502 Bad Gateway | Gateway (like Nginx) failed to reach backend
+503 Service Unavailable | Server is down or overloaded
+
+##### HTTPException
+
+HTTPException is a special built-in exception in FastAPI used to _return custom HTTP error responses_ when something goes wrong in your API
+Instead of returning a normal JSON or crashing the server, you can _generally raise an error_ with:
+
+- a proper HTTP status code (like 404, 400, 403, etc)
+- a custom error message
+- (optional) extra headers
+
+#### Query Parameter
+
+Query parameters are optional key-value pairs appended to th end of a URL used to _pass additional data_ to the server in an HTTP request. They are typically employed for operations like filtering, sorting, searching, and pagination, without altering the endpoint path itself
+
+- the data which was showing to client with the /view endpoint is same to the data how it was added in the DB (unsorted)
+- But what if we want to show the sorted data instead of the normal data?
+- ex, sorting on weight/height/bmi in asc/desc
+
+Ex- _/patients?city=Delhi&sort_by=age_
+
+- the _?_ marks the start of query param
+- Each param is a key-vlaue pair: key=value
+- Multiple param are separated by &
+
+##### Query()
+
+Query() is a utility function provided by FastAPI to declare, validate, and document _query parameters_ in your API Endpoints
+It allows you to:
+
+- set _default values_
+- Enforce _validation rules_
+- Add _metadata_ like description, title, examples
+
+same as Path()
+
+##### New Endpoint
+
+sort patients -> query -> sortyby -> weight, height, bmi
+|\_ query -> order -> asc, desc
