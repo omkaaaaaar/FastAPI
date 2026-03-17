@@ -270,3 +270,27 @@ same as Path()
 
 sort patients -> query -> sortyby -> weight, height, bmi
 |\_ query -> order -> asc, desc
+
+---
+
+### Video 5: Pydantic Crash Course | Data Validation in Python
+
+#### Why Pydatanic we need here?
+
+Overview: pydantic solves 2 major problems
+
+- Type Validation
+- Data Validation
+
+#### Pydantic
+
+- **Define a Pydantic model**(class) that represents the **ideal schema** of the data.
+  - This includes the expected fields, their types and any validation constraints (e.g. _gt=0_ for positive numbers)
+- **Instantiate the model with raw input data** (usually a dict or JSON-like structure)
+  - Pydantic will automatically **validate** the date and **coerce** it into the correct Python types (if possible)
+  - if the data doesn't meet the model's requirements. pydantic raises a _ValidationError_ ((e.g. {name -> Omkar, age -> 21}) -> this dict is traferred to the class obj (in this process the data ets automatically validated)) -> here we get the validated pydantic model
+- **Pass the validated model object** to functions or use it throughout your codebase
+  - This ensures that every part of your program works with **clean, type-safe, and logically valid data**
+    (the validated pydantic object we recieve here, our function performs the logic when it recieves this obj )
+
+##### 2 versions of Pydantic, Use Pydantic v2 cause it is written in Rust and it is FAST because of it and it is mostly used now
