@@ -1,7 +1,46 @@
 from fastapi import FastAPI, Path, HTTPException, Query
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field, computed_field
+from typing import Annotated, Literal
 import json
 
 app = FastAPI() #object of FastAPI class is created and stored in the variable app
+
+
+
+
+class Patient(BaseModel): 
+
+    id: Annotated[str, Field(..., description='ID of the patient', example='P001')]
+    name: Annotated[str, Field(..., description='Name of the patient')]
+    city: Annotated[str, Field(..., description='City of residence of the patient')]
+    age: Annotated[int, Field(..., description='Age of the patient', ge=0, le=120)]
+    gender: Annotated[Literal['Male', 'Female', 'Other'], Field(..., description='Gender of the patient')]
+    height: Annotated[float, Field(..., description='Height of the patient in mtrs', gt=0)]
+    weight: Annotated[float, Field(..., description='Weight of the patient in kg', gt=0)]
+
+    @computed_field
+    @property
+    def bmi(self) -> float: #computed field ka naam hoga bmi, isse self milega aur ye return float karega
+        bmi = round(self.weight/(self.height ** 2), 2)
+        return bmi
+    
+
+    @computed_field   #this field will be computed based on the value of bmi, it will return a string value based on the bmi value. Even if there is no BMI Value rn, if the Body Verdict is called, the verdict will will trigger the BMI Function and the BMI will be calculated and then the verdict will be returned based on the BMI value
+    @property
+    def verdict(self) -> str:
+        if self.bmi < 18.5:
+            return 'Underweight'
+        elif self.bmi < 25:
+            return 'Normal Weight'
+        elif self.bmi < 30:
+            return 'Overweight'   
+        else:
+            return 'Obese'
+
+
+
+
 
 def load_data():
     # This function can be used to load data from a database or a file
@@ -9,6 +48,11 @@ def load_data():
         data = json.load(f)
 
         return data
+
+def save_data(data):
+    # This function can be used to save data to a database or a file
+    with open('patients.json', 'w') as f: #w means write mode
+        json.dump(data, f)
 
 
 @app.get("/") # Define a GET endpoint at the root URL ("/"), the get signifies that this endpoint will respond to GET requests
@@ -57,3 +101,27 @@ def sort_patients(sort_by: str = Query(..., description='Sort on the basis of he
     sorted_data = sorted(data.values(), key=lambda x: x.get(sort_by, 0), reverse=sort_order)
 
     return sorted_data
+
+
+
+# POST Endpoint
+
+@app.post('/create')
+def create_patient(patient: Patient): #the json data sent by the client will be stored in the variable called patient, and the Data Type of the patient variable is 'Patient' which is a Pydantic model defined above, so the incoming json data will be validated against the Patient model
+
+    # load existing data
+    data = load_data()
+
+    # Check if patient ID already exists
+    if patient.id in data:
+        raise HTTPException(status_code=400, detail='Patient ID already exists')
+
+    # Add new patient to data, merging new data to existing data
+    # since the existing data is a dict, and patient is an pydantic model, so we will now add the pydantic model in the existing data
+    # step 1: convert the pydantic model to a dict using the .dict() method, this will give us a dictionary representation of the patient data
+    data[patient.id] = patient.model_dump(exclude={'id'}) #new patient added to out existing db
+
+    #save into the json file
+    save_data(data)
+
+    return JSONResponse(status_code=201, content={'message': 'Patient created successfully'}) 
