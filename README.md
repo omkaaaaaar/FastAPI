@@ -323,8 +323,19 @@ Other everything is in omkaaaaaar/pydantic repo
 
 ##### What is request body?
 
-A request body is the portion of an HTTP request that contains data sent by the client to the server. It is typically used in HTTP methoda such as a POST or PUT (update) to transmit structured data(e.g. JSON, XML, form-data) for the purpose of creating or updating resources on the server. \*The server parses the request body to extract the necessary information and perform the intended operation.
+A request body is the portion of an HTTP request that contains data sent by the client to the server. It is typically used in HTTP methods such as a POST or PUT (update) to transmit structured data(e.g. JSON, XML, form-data) for the purpose of creating or updating resources on the server. \*The server parses the request body to extract the necessary information and perform the intended operation.
 
 - Step 1: Basically, in this process of creating the endpoint the request sent by the client to the server in the form of HTTP request will be POST, with which the client will also share the request body which will consist of the patient info(in this case of hospital management; patient info), With the help of this data we will create a new data on the backend
 - Step 2: Validation - We'll validate the data sent by the client to the server; e.x., the client sent us the age as "Thirty" as a str which is not acceptable (cuz we are expecting int). So we'll need to validate the data. We will make a Pydantic model inorder to perform Data Validation here. If the data is validated with the help of the model then we'll continue or if not then we will raise a error
 - Step 3: Adding/Storing the record - If the data is validated then we will add our record in the JSON File
+
+---
+
+### Video 7: PUT & DELETE in FastAPI
+
+##### Today
+
+Today in this part we will create 2 more new Endpoints
+
+- Update
+- Delete
