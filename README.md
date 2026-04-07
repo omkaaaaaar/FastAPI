@@ -347,5 +347,9 @@ where the client will provide _patient_ID_ and a _request_body_ (in request body
 
 The HTTP method we will use here will be **PUT**
 Tricky Part:- Client might need to change everyting of a particular patient or only a specific info, which we don't know yet. Soo we'll need to structure our logic in a way that even if the client changes the particular info or everything, our update mechanism should work in both of these two changes
+
 Step 1 - Create a new Pydantic Model
 (we can't use our previous model here bcuz, every fields in the previous model are required, so the pre-existing model will expect every required fields, but we are now only updating and not creating model and we don't knwo if client will provide everything which is required: SO, we are creating a new pydantic model)
+In the new model we will keep all the fields optional
+
+Step 2 - Once the data is validated we will update it in the existing value
