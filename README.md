@@ -340,6 +340,15 @@ Today in this part we will create 2 more new Endpoints
 - Update
 - Delete
 
+#### Patient API
+
+- view (can view every detail of patient)
+- patient (viewing a particular patient by providing P_ID )
+- sort (can view every patient but by sorting em on the basis of weight, height, bmi,etc)
+- create (to add a new patient in db)
+- **update/edit** -in this section
+- **delete** -in this section
+
 #### Update Endpoint
 
 We will create **/edit** endpoint today,
