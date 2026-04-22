@@ -38,7 +38,7 @@ class Patient(BaseModel):
         else:
             return 'Obese'
 
-
+# Vid 7
 # Second Pydantic Model | Patient Update
 class PatientUpdate(BaseModel):
 
@@ -48,9 +48,6 @@ class PatientUpdate(BaseModel):
     gender: Annotated[Optional[Literal['male', 'female']], Field(default=None)]
     height: Annotated[Optional[float], Field(default=None, gt=0)]
     weight: Annotated[Optional[float], Field(default=None, gt=0)]
-
-
-
 
 
 def load_data():
@@ -139,18 +136,21 @@ def create_patient(patient: Patient): #the json data sent by the client will be 
 
 
 
-@app.put('/edit/{patient_id}')
-def update_patient(patient_id: str, patient_update: PatientUpdate):
+@app.put('/edit/{patient_id}') #the patient_id is a path parameter that will be passed in the URL which is a dynamic variable
+def update_patient(patient_id: str, patient_update: PatientUpdate): #patient_update is the request body, client will send the new info of patient and we will recieve it here in patient_update variable, which we previously defined as a pydantic model above
     
     data = load_data()
 
     if patient_id not in data:
         raise HTTPException(status_code=404, detail='Patient not found')
 
-    existing_patient_info = data[patient_id]
+    existing_patient_info = data[patient_id] #took the existing patient data of the patient_id provide  by user and stored it in the variable existing_patient_info
 
     update_patient_info = patient_update.model_dump(exclude_unset=True) #this will give us a dict of only those fields which are being updated, the fields which are not being updated will not be included in the dict
+    #exclude_unset=True is used to exclude the fields which are not being updated, so that we only get the fields which are being updated in the update_patient_info dict
+
+    #now we have 2 dict, 1st existing_patient_info dict which has the existing patient data, and 2nd update_patient_info dict which has the new patient data which is being updated by the user, now we have to merge these 2 dict, so that we get the updated patient data
 
     for key, value in update_patient_info.items():
         existing_patient_info[key] = value #this will update the existing patient info with the new values
-    # here we performed loop in Update Dict but we are changing in the existing dict because both the dict are pointing to the same memory location, so when we change the update dict, the existing dict will also get updated
+    # here we performed loop in Update Dict but we are changing in the existing dict
