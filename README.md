@@ -363,3 +363,22 @@ In the new model we will keep all the fields optional
 We will not ask P_ID here, cause we are already taking it as path parameter soo it will not be a part of the request body
 
 Step 2 - Once the data is validated we will update it in the existing value
+
+Step 3... - Explained in the code/main.py
+
+#### Delete Endpoint
+
+It will require
+
+- patient_id, as a path parameter
+
+Http Methof
+
+- Delete
+
+Flow
+
+1. Asking Patient ID
+2. Loading whole data
+3. Finding the key value pair of patient_id
+4. Removing the exact key value pair
