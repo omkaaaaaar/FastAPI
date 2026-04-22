@@ -154,3 +154,21 @@ def update_patient(patient_id: str, patient_update: PatientUpdate): #patient_upd
     for key, value in update_patient_info.items():
         existing_patient_info[key] = value #this will update the existing patient info with the new values
     # here we performed loop in Update Dict but we are changing in the existing dict
+
+    #after this above loop we will have the updated patient data in the existing_patient_info dict, now we have to put the updated patient data back to our main data where the patient_id is the key and the updated patient data is the value, so that our main data will also get updated with the new patient data
+    #it is simple, but for us, we'll have to update the BMI and the verdict!
+
+    #we will now convert the updated patient data (existing_patient_info) to a new pydantic model, because of this conversion the computed fields will automically get calculated 
+    # existing_patient_info -> pydantic object -> updated bmi + verdict  
+    existing_patient_info['id'] = patient_id #since the id is not a part of the update_patient_info dict, we have to add it manually to the existing_patient_info dict, so that when we convert it to a pydantic model, it will have the id field as well, which is required in the Patient model otherwise we would get an error
+    patient_pydantic_obj = Patient(**existing_patient_info) #this will convert the existing_patient_info dict to a pydantic model
+    # -> pydantic object -> dict
+    existing_patient_info = patient_pydantic_obj.model_dump(exclude='id') #this will convert the pydantic model back to a dict, but we will exclude the id field because we don't want to update the id field, we only want to update the other fields, and the id field will remain the same
+
+    #add this dict to data
+    data[patient_id] = existing_patient_info
+
+    #save the data
+    save_data(data)
+
+    return JSONResponse(status_code=200, content={'message': 'Patient updated'})
