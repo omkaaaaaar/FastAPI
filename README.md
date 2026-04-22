@@ -382,3 +382,9 @@ Flow
 2. Loading whole data
 3. Finding the key value pair of patient_id
 4. Removing the exact key value pair
+
+### Patient Management System/ CRUD operations done
+
+## Fast API Fundamentals Done
+
+---
